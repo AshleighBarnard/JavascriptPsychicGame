@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<HTML lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- Added link to the jQuery library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+</head>
+
+<body>
+  <!-- fluid jumbotron-->
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="row">
+
+      <img src="galaxy1.png" class="img-responsive" alt="galaxy"> </div>
+
+    <!-- columns for game -->
+    <div id="game">
+    <div class="container">
+        <div class="col-md-12" id="psychic game container">
+
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    <h1>Can you guess the letter human?</h1>
+                </div>
+              </div>
+        
+          <p>
+            <h4 id="wins" class="text-center">Wins: 0</h4>
+          </p>
+          <p>
+            <h4 id="losses" class="text-center">Losses: 0</h4>
+          </p>
+          <p>
+            <h4 class="text-center">Guesses Left: 9</h4>
+          </p>
+          <p>
+            <h4 class="text-center">Your guesses so far: </h4>
+          </p>
+        </div>
+        <div class="col-md-12"></div>
+      </div>
+    </div>
+  </div>
+
+    <!-- set up variables and array & start java -->
+
+    <script type="text/javascript">
+      var computerOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+        "s",
+        "t", "u", "v", "w", "x", "y", "z"
+      ];
+      var wins = 0;
+      var losses = 0;
+      var guessesLeft = 9;
+      var guessesSoFar = [];
+
+      //first function
+      document.onkeyup = function (event) {
+          var userGuess = event.key;
+
+          // get the game going 
+          var computerGuess = computerOptions[Math.floor(Math.random() * computerOptions.length)];
+          guessesSoFar.push(userGuess);
+
+
+          if (userGuess === computerGuess) {
+            wins++;
+            alert("You must have cheated. No one ever beats me!");
+            guessesLeft = 9;
+            guessesSoFar.length = 0; //reset the array
+            document.querySelector('#wins').innerHTML = "Total Wins: " + wins; 
+
+          }
+          else if (guessesLeft === 0) {
+            losses++;
+            alert("Gotta be quicker than that! Guess again.")
+            guessesLeft= 9;
+            guessesSoFar.length = 0;
+            document.querySelector('#losses').innerHTML = "Total Losses: " + losses; 
+
+
+          }
+          else if (userGuess !== computerGuess){
+          guessesLeft--; //lowering the guesses left
+          }
+        }
+    </script>
+  </div>
+</body>
+
+</HTML>
